@@ -81,6 +81,61 @@ The actual simulation output to be used for DP0.3 is yet to be produced, but a p
 Service Model
 =============
 
+The RSP instance for DP0.3 would be in the IDF (Google cloud), and, we argue below, could and likely should share most of its components with the existing data.lsst.cloud RSP instance for DP0.2.
+
+Back-end data for DP0.3 as envisioned herein is limited to catalogs.
+Therefore no image file store is required, no image metadata service (e.g., ObsTAP), and no DataLink "links service".
+
+The components that *are* required follow:
+
+Catalog Database
+----------------
+
+Qserv is probably not a suitable choice for the database back end, for two reasons:
+
+- In the operations-era system, the SSO tables will live in the "Prompt Products Database" (PPDB), which is baselined as PostgreSQL.
+- At the moment, Qserv does not have natural support for sharding the SSObject-to-SSSource relationship, which is not spatially localized.
+
+In any event, based on SSSC experience and expert opinion, a single (large) PostgreSQL server should be adequate for the datasets envisioned.
+To support spatial searches via (CADC) TAP, the ``pgsphere`` extension should be installed.
+
+In the "Hybrid Model" for the US DAC, the user-facing services will be in the Google cloud, with the data back ends at the USDF.
+Replicating this model for DP0.3 would require a large Postgres server at SLAC.
+We will analyze the feasibility of this on the relevant time scale.
+
+An alternative would be to configure a Postgres service at the IDF (Google cloud).
+Some research will be required to determine whether a sufficiently large Postgres service can be configured easily in the Google cloud.
+
+Data Services
+-------------
+
+TAP service
+^^^^^^^^^^^
+
+If the database is in Postgres, the CADC TAP service should be used.
+The work done in December/January 2022/23 to produce a Postgres-based TAP service for the "live ObsTAP" instances should be applicable.
+The same DataLink-support extensions to CADC TAP that are available in the Qserv-backed TAP implementation will be needed for DP0.3 as well.
+
+At present we do not have the ability to support multiple back ends from a single TAP service instance, so DP0.3 will require its own TAP endpoint even  if it is otherwise incorporated into data.lsst.cloud.  For instance, "data.lsst.cloud/api/ssotap" might be a suitable name.
+
+DataLink and ancillary services
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As noted above, no DataLink "links service" for images is required or even relevant to DP0.3.
+
+User Interface Services
+-----------------------
+
+Portal Aspect considerations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Notebook Aspect considerations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Authentication and Authorization
+--------------------------------
+
+
 .. A non-Rubin all-sky HiPS image, likely from 2MASS, will be used as the default context image for display of query results in the RSP Portal Aspect.
    This is acceptable for DP0.3 because there is no simulated static sky involved that is significantly different from the real universe
    (Unlike the case for DP0.2).
@@ -93,6 +148,15 @@ Database Setup
 
 Ingest
 ------
+
+On `PREOPS-1152`_, Mario Juric reports that:
+
+"For our internal use, we've used pg_bulkload to rapidly (in ~30 minutes) ingest these tables into a database. 
+The details are in this (messy) notebook.
+Using more typical loading mechanisms (from .csv files, etc.) is not an issue, just will be slower.
+
+"If a postgres database can be set up within the RSP, with pg_bulkload enabled and given administrative permissions I would be able to load these data into it probably in a ~few days.
+This setup would also allow for uploads of future dataset updates: we refresh these simulations ~annually, as new baseline simulations become available and the software is improved."
 
 Data Model Metadata
 -------------------
