@@ -76,7 +76,7 @@ It produces the following tables, all of which have reference definitions in the
 The simulation is based on a specific, chosen OpSim run.
 The actual simulation output to be used for DP0.3 is yet to be produced, but a prototype dataset exists and has been in use by the SSSC, ingested into a PostgreSQL database.
 
-.._DPDD: https://lse-163.lsst.io/
+.. _DPDD: https://lse-163.lsst.io/
 
 Service Model
 =============
