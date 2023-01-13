@@ -8,7 +8,9 @@
 
 .. note::
 
-   **This technote HAS BEEN MOVED TO `RTN-050 <https://rtn-050.lsst.io>`__**
+   **This technote HAS BEEN MOVED TO `RTN-050`_ .**
+   
+.. _RTN-050: https://rtn-050.lsst.io/
 
 
 .. Make in-text citations with: :cite:`bibkey`.
