@@ -8,7 +8,7 @@
 
 .. note::
 
-   **This technote HAS BEEN MOVED TO `RTN-050`_ .**
+   **This technote HAS BEEN MOVED** to `RTN-050`_ .
    
 .. _RTN-050: https://rtn-050.lsst.io/
 
