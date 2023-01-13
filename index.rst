@@ -8,18 +8,8 @@
 
 .. note::
 
-   **This technote is a work-in-progress.**
+   **This technote HAS BEEN MOVED TO `RTN-050 <https://rtn-050.lsst.io>`__**
 
-Abstract
-========
-
-Describes the means of serving the desired DP0.3 data through the services of the Rubin Science Platform.  Initially will serve as a proposal and then evolve into an as-built description.
-
-Add content here
-================
-
-Add content here.
-See the `reStructuredText Style Guide <https://developer.lsst.io/restructuredtext/style.html>`__ to learn how to create sections, links, images, tables, equations, and more.
 
 .. Make in-text citations with: :cite:`bibkey`.
 .. Uncomment to use citations
